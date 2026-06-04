@@ -1,0 +1,73 @@
+<div class="mod-header">
+  <span class="mod-title">⊕ Monitor del Sistema</span>
+  <div style="display:flex;gap:6px;align-items:center;">
+    <span id="mon-updated" class="mod-time">—</span>
+    <button class="btn btn-sm" onclick="window._MON.refresh()">↺</button>
+  </div>
+</div>
+
+<!-- PC Principal (Windows / agente remoto) -->
+<div class="mon-section-title">PC Principal</div>
+<div class="mon-host-row">
+  <div class="mon-host-info">
+    <span id="mon-pc-host" class="mon-hostname">—</span>
+    <span id="mon-pc-badge" class="badge badge-off">Sin datos</span>
+  </div>
+  <div class="mon-host-meta" id="mon-pc-meta"></div>
+</div>
+<div class="mon-bars" id="mon-pc-bars">
+  <div class="metric-item">
+    <div class="metric-lbl"><span>CPU</span><span class="metric-val" id="mon-pc-cpu">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-pc-cpu-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>RAM</span><span class="metric-val" id="mon-pc-ram">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-pc-ram-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>Disco</span><span class="metric-val" id="mon-pc-disk">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-pc-disk-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>Batería</span><span class="metric-val" id="mon-pc-bat">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-pc-bat-bar"></div></div>
+  </div>
+</div>
+
+<div class="mon-divider"></div>
+
+<!-- Servidor Ubuntu -->
+<div class="mon-section-title">Servidor Ubuntu</div>
+<div class="mon-host-row">
+  <div class="mon-host-info">
+    <span id="mon-sv-host" class="mon-hostname">—</span>
+    <span id="mon-sv-badge" class="badge badge-off">Verificando…</span>
+  </div>
+  <div class="mon-host-meta" id="mon-sv-meta"></div>
+</div>
+<div class="mon-bars">
+  <div class="metric-item">
+    <div class="metric-lbl"><span>CPU</span><span class="metric-val" id="mon-sv-cpu">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-sv-cpu-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>RAM</span><span class="metric-val" id="mon-sv-ram">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-sv-ram-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>Disco</span><span class="metric-val" id="mon-sv-disk">—</span></div>
+    <div class="bar-track"><div class="bar-fill" id="mon-sv-disk-bar"></div></div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-lbl"><span>Docker</span><span class="metric-val" id="mon-sv-docker">—</span></div>
+    <div class="bar-track" style="height:5px;background:var(--surface);"></div>
+  </div>
+</div>
+
+<div class="mon-divider"></div>
+
+<!-- Red y servicios -->
+<div class="mon-section-title">Estado de Servicios</div>
+<div id="mon-services" class="mon-services-grid">
+  <div class="loading">Verificando…</div>
+</div>

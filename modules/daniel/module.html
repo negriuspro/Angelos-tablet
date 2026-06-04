@@ -1,0 +1,48 @@
+<div class="mod-header">
+  <span class="mod-title">◉ Daniel — Asistente IA</span>
+  <div style="display:flex;gap:6px;align-items:center;">
+    <span id="dan-conn" class="badge badge-off">Desconectado</span>
+    <span id="dan-bat"  class="badge badge-off">Batería —</span>
+  </div>
+</div>
+
+<!-- Chat -->
+<div id="chat-shell">
+  <div id="chat-messages">
+    <div class="msg msg-sys">Di "Daniel" o toca el micrófono</div>
+  </div>
+  <div id="chat-footer">
+    <textarea id="chat-input" placeholder="Escribe un comando…" rows="1"></textarea>
+    <button id="dan-mic" class="mic-btn" title="Micrófono">🎤</button>
+    <button id="dan-send" class="btn btn-primary btn-sm">▶</button>
+  </div>
+</div>
+
+<!-- Panel inferior: Smart Home + Sistema -->
+<div class="dan-panels">
+  <div class="card">
+    <div class="card-title">
+      ⚡ Smart Home
+      <button class="btn btn-sm" style="float:right;margin-top:-4px;" onclick="window._DAN.loadDevices()">↺</button>
+    </div>
+    <div id="dan-devices"><div class="loading">Cargando…</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Sistema Servidor</div>
+    <div class="metric-row">
+      <div class="metric-item">
+        <div class="metric-lbl"><span>CPU</span><span class="metric-val" id="dan-cpu">—</span></div>
+        <div class="bar-track"><div class="bar-fill" id="dan-cpu-bar"></div></div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-lbl"><span>RAM</span><span class="metric-val" id="dan-ram">—</span></div>
+        <div class="bar-track"><div class="bar-fill" id="dan-ram-bar"></div></div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-lbl"><span>Disco</span><span class="metric-val" id="dan-disk">—</span></div>
+        <div class="bar-track"><div class="bar-fill" id="dan-disk-bar"></div></div>
+      </div>
+    </div>
+  </div>
+</div>

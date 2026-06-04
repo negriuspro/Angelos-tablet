@@ -1,0 +1,71 @@
+/* Monitor — estilos del módulo */
+
+.mon-section-title {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin: 14px 0 8px;
+}
+
+.mon-host-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+.mon-host-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.mon-hostname {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+.mon-host-meta {
+  font-size: 10px;
+  color: var(--dim);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.mon-bars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin-bottom: 8px;
+}
+
+.mon-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+
+.mon-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.mon-svc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mon-svc-name { font-size: 10px; color: var(--text); }
+.mon-svc-latency { font-size: 9px; color: var(--dim); }
+
+@media (max-width: 600px) {
+  .mon-bars { grid-template-columns: 1fr; }
+  .mon-host-meta { display: none; }
+}

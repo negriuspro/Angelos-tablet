@@ -1,0 +1,30 @@
+name: angelos
+
+# AngelOS — Plataforma centralizada para tablets Android legacy
+# Puerto 3005 — independiente, no colisiona con ningún proyecto existente.
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "${ANGELOS_PORT:-3005}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./app:/usr/share/nginx/html/app:ro
+      - ./modules:/usr/share/nginx/html/modules:ro
+    mem_limit: 32m
+    cpus: "0.10"
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

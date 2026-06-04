@@ -1,0 +1,47 @@
+/* Settings — estilos del módulo */
+
+.cfg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cfg-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.cfg-about {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cfg-about-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(30,58,95,0.35);
+  font-size: 11px;
+  gap: 8px;
+}
+.cfg-about-row:last-child { border-bottom: none; }
+.cfg-about-row span:first-child { color: var(--dim); flex-shrink: 0; }
+.cfg-about-row span:last-child  { color: var(--text); text-align: right; }
+
+.cfg-diag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(30,58,95,0.3);
+  font-size: 11px;
+}
+.cfg-diag-row:last-child { border-bottom: none; }
+.cfg-diag-name { color: var(--dim); }
+.cfg-diag-ms   { font-size: 9px; color: var(--dim); margin-top: 1px; }
+
+@media (max-width: 600px) {
+  .cfg-grid    { grid-template-columns: 1fr; }
+  .cfg-actions { flex-direction: column; }
+}

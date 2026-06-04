@@ -1,0 +1,72 @@
+<div class="mod-header">
+  <span class="mod-title">⚙ Configuración</span>
+  <span id="cfg-saved" class="badge" style="opacity:0;transition:opacity 0.3s">Guardado</span>
+</div>
+
+<div class="cfg-grid">
+
+  <!-- Servidor -->
+  <div class="card">
+    <div class="card-title">Servidor Ubuntu</div>
+    <div class="field">
+      <label>Dirección IP / Hostname</label>
+      <input id="cfg-host" type="text" placeholder="192.168.100.6">
+    </div>
+  </div>
+
+  <!-- Puertos -->
+  <div class="card">
+    <div class="card-title">Puertos de Proyectos</div>
+    <div class="field"><label>Daniel</label>
+      <input id="cfg-p-daniel"    type="number" min="1" max="65535"></div>
+    <div class="field"><label>Antigravity Hub</label>
+      <input id="cfg-p-hub"       type="number" min="1" max="65535"></div>
+    <div class="field"><label>Angel Ctrl</label>
+      <input id="cfg-p-angelCtrl" type="number" min="1" max="65535"></div>
+    <div class="field"><label>Shield</label>
+      <input id="cfg-p-shield"    type="number" min="1" max="65535"></div>
+    <div class="field"><label>AdGuard Admin</label>
+      <input id="cfg-p-adguard"   type="number" min="1" max="65535"></div>
+  </div>
+
+  <!-- Credenciales -->
+  <div class="card">
+    <div class="card-title">Credenciales (guardadas en este dispositivo)</div>
+    <div class="field"><label>Daniel — Admin Token</label>
+      <input id="cfg-dan-token" type="password" placeholder="Dejar vacío si no aplica"></div>
+    <div class="field"><label>Angel Ctrl — API Key</label>
+      <input id="cfg-ac-key"    type="password" placeholder="Dejar vacío si no aplica"></div>
+  </div>
+
+  <!-- Comportamiento -->
+  <div class="card">
+    <div class="card-title">Comportamiento</div>
+    <div class="field"><label>Polling de métricas (ms)</label>
+      <input id="cfg-poll" type="number" min="2000" max="60000" step="1000"></div>
+  </div>
+
+</div>
+
+<!-- Acciones -->
+<div class="cfg-actions">
+  <button class="btn btn-primary btn-block" id="cfg-save-btn">✓ Guardar configuración</button>
+  <button class="btn btn-block"             id="cfg-reset-btn">↺ Restablecer valores por defecto</button>
+</div>
+
+<!-- Diagnóstico -->
+<div class="card" style="margin-top:14px;">
+  <div class="card-title">Diagnóstico de conexión</div>
+  <div id="cfg-diag"><div class="loading">Presiona "Probar" para verificar</div></div>
+  <button class="btn btn-sm" style="margin-top:10px;" id="cfg-test-btn">🔍 Probar conexiones</button>
+</div>
+
+<!-- Info -->
+<div class="card" style="margin-top:10px;">
+  <div class="card-title">Acerca de AngelOS</div>
+  <div class="cfg-about">
+    <div class="cfg-about-row"><span>Versión</span><span>1.0.0</span></div>
+    <div class="cfg-about-row"><span>Plataforma</span><span>Android 4.4+ / Tablet</span></div>
+    <div class="cfg-about-row"><span>Servidor</span><span id="cfg-server-url">—</span></div>
+    <div class="cfg-about-row"><span>Módulos</span><span>Dashboard · Daniel · Angel Ctrl · Monitor · Shield</span></div>
+  </div>
+</div>

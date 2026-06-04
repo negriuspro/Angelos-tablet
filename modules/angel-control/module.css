@@ -1,0 +1,58 @@
+/* Angel Control — estilos del módulo */
+
+.ac-summary-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ac-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 8px;
+  text-align: center;
+}
+.ac-stat-label { font-size: 8px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-bottom: 4px; }
+.ac-stat-val   { font-size: 20px; font-weight: bold; color: var(--text); line-height: 1; }
+
+.ac-filter {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.ac-filter-btn        { color: var(--dim); }
+.ac-filter-btn.active { border-color: var(--accent); color: var(--accent); }
+
+.ac-container-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ac-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color var(--t);
+}
+.ac-card.running { border-left-color: var(--accent2); }
+.ac-card.stopped { border-left-color: var(--dim); }
+.ac-card.restarting { border-left-color: var(--warn); }
+
+.ac-info { flex: 1; min-width: 0; }
+.ac-name   { font-size: 12px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-detail { font-size: 9px; color: var(--dim); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.ac-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+  .ac-summary-row { grid-template-columns: repeat(3, 1fr); }
+  .ac-card { flex-wrap: wrap; }
+  .ac-actions { width: 100%; justify-content: flex-end; }
+}

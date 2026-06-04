@@ -1,0 +1,11 @@
+{
+  "name": "AngelOS",
+  "short_name": "AngelOS",
+  "description": "Plataforma centralizada para control del servidor",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0a0f1a",
+  "theme_color": "#00c8ff",
+  "icons": []
+}

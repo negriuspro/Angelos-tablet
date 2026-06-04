@@ -1,0 +1,42 @@
+<div class="mod-header">
+  <span class="mod-title">⊛ Antigravity Shield</span>
+  <div style="display:flex;gap:6px;align-items:center;">
+    <span id="sh-conn" class="badge badge-off">Verificando…</span>
+    <button class="btn btn-sm" onclick="window._SH.refresh()">↺</button>
+  </div>
+</div>
+
+<!-- Stats DNS -->
+<div class="sh-grid-top">
+
+  <div class="card">
+    <div class="card-title">🛡 AdGuard DNS — Hoy</div>
+    <div id="sh-dns-stats">
+      <div class="loading">Cargando…</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Actividad de Red</div>
+    <div id="sh-net-stats">
+      <div class="loading">Cargando…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Servicios de monitoreo -->
+<div class="card" style="margin-top:10px;">
+  <div class="card-title">Servicios de Monitoreo</div>
+  <div id="sh-monitoring" class="sh-mon-grid">
+    <div class="loading">Verificando…</div>
+  </div>
+</div>
+
+<!-- Alertas recientes (si el backend las expone) -->
+<div class="card" style="margin-top:10px;">
+  <div class="card-title">Estado General</div>
+  <div id="sh-overall" style="font-size:12px;line-height:1.8;color:var(--text);">
+    <div class="loading">Cargando…</div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="mod-header">
+  <span class="mod-title">⊞ Angel Control — Docker Manager</span>
+  <div style="display:flex;gap:6px;align-items:center;">
+    <span id="ac-conn" class="badge badge-off">Verificando…</span>
+    <button class="btn btn-sm" onclick="window._AC.refresh()">↺</button>
+  </div>
+</div>
+
+<!-- Resumen rápido -->
+<div class="ac-summary-row">
+  <div class="ac-stat-card">
+    <div class="ac-stat-label">Total</div>
+    <div class="ac-stat-val" id="ac-total">—</div>
+  </div>
+  <div class="ac-stat-card">
+    <div class="ac-stat-label">Activos</div>
+    <div class="ac-stat-val" id="ac-running" style="color:var(--accent2)">—</div>
+  </div>
+  <div class="ac-stat-card">
+    <div class="ac-stat-label">Detenidos</div>
+    <div class="ac-stat-val" id="ac-stopped" style="color:var(--dim)">—</div>
+  </div>
+  <div class="ac-stat-card">
+    <div class="ac-stat-label">CPU</div>
+    <div class="ac-stat-val" id="ac-cpu">—</div>
+  </div>
+  <div class="ac-stat-card">
+    <div class="ac-stat-label">RAM</div>
+    <div class="ac-stat-val" id="ac-ram">—</div>
+  </div>
+</div>
+
+<!-- Filtro -->
+<div class="ac-filter">
+  <button class="btn btn-sm ac-filter-btn active" data-filter="all">Todos</button>
+  <button class="btn btn-sm ac-filter-btn" data-filter="running">Activos</button>
+  <button class="btn btn-sm ac-filter-btn" data-filter="stopped">Detenidos</button>
+</div>
+
+<!-- Lista de contenedores -->
+<div id="ac-containers" class="ac-container-list">
+  <div class="loading">Cargando contenedores…</div>
+</div>

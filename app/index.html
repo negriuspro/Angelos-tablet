@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0f1a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>AngelOS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div id="shell">
+
+  <!-- Barra lateral de navegación -->
+  <nav id="nav">
+    <div class="nav-logo">ANGEL<br>OS</div>
+    <!-- Los botones de módulo se generan dinámicamente en app.js -->
+  </nav>
+
+  <!-- Área de contenido principal -->
+  <main id="main">
+    <div class="loading">Iniciando AngelOS…</div>
+  </main>
+
+</div>
+
+<!-- Core: config → api → app (en orden) -->
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

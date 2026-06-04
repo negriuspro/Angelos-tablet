@@ -1,0 +1,52 @@
+<div class="mod-header">
+  <span class="mod-title">⊙ Dashboard</span>
+  <span id="db-time" class="mod-time"></span>
+</div>
+
+<!-- Estado de servicios -->
+<div class="db-services" id="db-services">
+  <div class="loading">Verificando servicios…</div>
+</div>
+
+<!-- Métricas del servidor Ubuntu -->
+<div class="db-section-title">Servidor Ubuntu</div>
+<div class="db-metrics" id="db-metrics">
+  <div class="db-metric-card" id="db-cpu">
+    <div class="dbm-label">CPU</div>
+    <div class="dbm-value">—</div>
+    <div class="bar-track"><div class="bar-fill" id="dbm-cpu-bar"></div></div>
+  </div>
+  <div class="db-metric-card" id="db-ram">
+    <div class="dbm-label">RAM</div>
+    <div class="dbm-value" id="dbm-ram-val">—</div>
+    <div class="bar-track"><div class="bar-fill" id="dbm-ram-bar"></div></div>
+  </div>
+  <div class="db-metric-card">
+    <div class="dbm-label">Disco</div>
+    <div class="dbm-value" id="dbm-disk-val">—</div>
+    <div class="bar-track"><div class="bar-fill" id="dbm-disk-bar"></div></div>
+  </div>
+  <div class="db-metric-card">
+    <div class="dbm-label">Batería PC</div>
+    <div class="dbm-value" id="dbm-bat-val">—</div>
+    <div class="bar-track"><div class="bar-fill" id="dbm-bat-bar"></div></div>
+  </div>
+</div>
+
+<!-- Contenedores Docker -->
+<div class="db-section-title">
+  Contenedores Docker
+  <span id="db-ct-summary" class="badge" style="margin-left:8px;"></span>
+</div>
+<div id="db-containers" class="db-containers">
+  <div class="loading">Cargando contenedores…</div>
+</div>
+
+<!-- Acceso rápido -->
+<div class="db-section-title">Acceso Rápido</div>
+<div class="db-quick">
+  <button class="db-quick-btn" onclick="window.AngelOS.navigate('daniel')">◉ Daniel</button>
+  <button class="db-quick-btn" onclick="window.AngelOS.navigate('angel-control')">⊞ Angel Ctrl</button>
+  <button class="db-quick-btn" onclick="window.AngelOS.navigate('monitor')">⊕ Monitor</button>
+  <button class="db-quick-btn" onclick="window.AngelOS.navigate('shield')">⊛ Shield</button>
+</div>

@@ -1,0 +1,130 @@
+/* Dashboard — estilos específicos del módulo */
+
+.mod-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.mod-time {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  font-family: var(--font);
+}
+
+/* ── Tarjetas de servicio ──────────────────── */
+.db-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.db-svc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: border-color var(--t);
+}
+.db-svc-card:active { border-color: var(--accent); }
+.db-svc-card.ok     { border-left: 3px solid var(--accent2); }
+.db-svc-card.err    { border-left: 3px solid var(--error);  }
+.db-svc-card.warn   { border-left: 3px solid var(--warn);   }
+.db-svc-name { font-size: 10px; letter-spacing: 2px; color: var(--text); text-transform: uppercase; }
+.db-svc-port { font-size: 9px; color: var(--dim); }
+
+/* ── Sección título ────────────────────────── */
+.db-section-title {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin: 14px 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Métricas ──────────────────────────────── */
+.db-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.db-metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.dbm-label { font-size: 8px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; }
+.dbm-value { font-size: 18px; font-weight: bold; color: var(--accent); line-height: 1; }
+
+/* ── Contenedores ──────────────────────────── */
+.db-containers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.db-containers::-webkit-scrollbar { width: 3px; }
+.db-containers::-webkit-scrollbar-thumb { background: var(--border); }
+
+.db-ct-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+}
+.db-ct-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.db-ct-dot.run { background: var(--accent2); }
+.db-ct-dot.stop { background: var(--dim); }
+.db-ct-name { flex: 1; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.db-ct-status { font-size: 9px; color: var(--dim); flex-shrink: 0; }
+
+/* ── Acceso rápido ─────────────────────────── */
+.db-quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.db-quick-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--dim);
+  font-family: var(--font);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 12px 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all var(--t);
+  min-height: 52px;
+}
+.db-quick-btn:active { border-color: var(--accent); color: var(--accent); background: rgba(0,200,255,0.06); }
+
+/* ── Responsive ────────────────────────────── */
+@media (max-width: 600px) {
+  .db-metrics { grid-template-columns: repeat(2, 1fr); }
+  .db-quick   { grid-template-columns: repeat(2, 1fr); }
+  .db-services { grid-template-columns: repeat(2, 1fr); }
+}
