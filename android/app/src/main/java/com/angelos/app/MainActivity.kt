@@ -5,31 +5,26 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-/**
- * AngelOS — WebView wrapper para tablet Android legacy (API 19+)
- *
- * Migrado desde: daniel/android/JarvisApp/MainActivity.kt
- * Cambios respecto al original:
- *  - URL centralizada: carga AngelOS en vez de Daniel directamente
- *  - IP configurable desde SharedPreferences (editable en Settings de AngelOS)
- *  - STT nativo disponible para todos los módulos (no solo Daniel)
- *  - Manejo de errores mejorado con retry exponencial
- */
 class MainActivity : AppCompatActivity(), RecognitionListener {
 
     private lateinit var webView: WebView
@@ -42,7 +37,6 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
         get() = prefs.getString("angelos_url", DEFAULT_URL) ?: DEFAULT_URL
 
     companion object {
-        // IP del servidor Ubuntu — editable desde Configuración de AngelOS
         const val DEFAULT_URL = "http://192.168.100.6:3005"
         val PERMS     = arrayOf(Manifest.permission.RECORD_AUDIO)
         const val PERM_CODE = 1001
@@ -56,7 +50,20 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
         hideSystemUI()
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
+        val rootLayout = FrameLayout(this).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            setBackgroundColor(Color.parseColor("#0a0f1a"))
+        }
+
         webView = WebView(this).apply {
+            visibility = View.INVISIBLE
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
             settings.apply {
                 javaScriptEnabled        = true
                 domStorageEnabled        = true
@@ -67,39 +74,79 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
                 displayZoomControls      = false
                 loadWithOverviewMode     = true
                 useWideViewPort          = true
-                // Permite HTTP en Android 9+ (servidor local sin HTTPS)
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                    mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                 }
             }
         }
 
+        val splashText = TextView(this).apply {
+            text = "AngelOS\nConectando al servidor..."
+            setTextColor(Color.WHITE)
+            textSize = 24f
+            gravity = Gravity.CENTER
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER
+            )
+        }
+
+        rootLayout.addView(webView)
+        rootLayout.addView(splashText)
+        setContentView(rootLayout)
+
+        // Forzar que el texto esté al frente
+        splashText.bringToFront()
+
         webView.webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: android.graphics.Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                // Mientras carga, ocultamos el WebView para que no se vea blanco
+                if (url == serverUrl) {
+                    webView.visibility = View.INVISIBLE
+                    splashText.visibility = View.VISIBLE
+                    splashText.bringToFront()
+                }
+            }
+
             override fun onPageFinished(view: WebView, url: String) {
-                // Indica al JS que STT nativo Android está disponible
-                view.evaluateJavascript("window.ANDROID_NATIVE = true;", null)
-                retryDelay = 3_000L
+                // Solo mostrar si cargó la URL real
+                if (url == serverUrl) {
+                    view.visibility = View.VISIBLE
+                    splashText.visibility = View.GONE
+                    view.evaluateJavascript("window.ANDROID_NATIVE = true;", null)
+                    retryDelay = 3_000L
+                }
             }
 
             @Suppress("OverridingDeprecatedMember", "DEPRECATION")
             override fun onReceivedError(
                 view: WebView, errorCode: Int, description: String, failingUrl: String
             ) {
+                // Bloqueamos la pantalla blanca del navegador
+                view.stopLoading()
+                view.loadUrl("about:blank")
+                view.visibility = View.INVISIBLE
+                
+                splashText.visibility = View.VISIBLE
+                splashText.bringToFront()
+                splashText.text = "Servidor no encontrado\nIP: $serverUrl\nReintentando en ${retryDelay/1000}s..."
+
+                handler.removeCallbacksAndMessages(null)
                 handler.postDelayed({
+                    splashText.text = "AngelOS\nConectando..."
                     view.loadUrl(serverUrl)
                     retryDelay = minOf(retryDelay * 2, 60_000L)
                 }, retryDelay)
             }
         }
 
-        setContentView(webView)
         webView.loadUrl(serverUrl)
 
         if (hasPermissions()) initSpeech()
         else ActivityCompat.requestPermissions(this, PERMS, PERM_CODE)
     }
-
-    // ── STT nativo Android ────────────────────────────────────────────────────
 
     private fun initSpeech() {
         if (!SpeechRecognizer.isRecognitionAvailable(this)) return
@@ -110,50 +157,39 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
 
     private fun startListening() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE,            "es-ES")
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "es-ES")
-            putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS,     true)
-            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,         1)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-ES")
+            putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
         }
         try {
             speechRecognizer?.startListening(intent)
         } catch (_: Exception) {
-            handler.postDelayed(::startListening, 1_000)
+            handler.postDelayed(::startListening, 1000)
         }
     }
 
-    // ── RecognitionListener — envía resultado al módulo activo en AngelOS ────
-
-    override fun onPartialResults(partialResults: Bundle) {
-        val text = partialResults
-            .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-            ?.firstOrNull() ?: return
-        injectResult(text, false)
-    }
-
     override fun onResults(results: Bundle) {
-        val text = results
-            .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-            ?.firstOrNull() ?: ""
+        val text = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: ""
         if (text.isNotBlank()) injectResult(text, true)
         handler.postDelayed(::startListening, 400)
     }
 
+    override fun onPartialResults(partialResults: Bundle) {
+        val text = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: return
+        injectResult(text, false)
+    }
+
     override fun onError(error: Int) {
-        val delay = if (error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) 1_200L else 500L
+        val delay = if (error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) 1200L else 500L
         handler.postDelayed(::startListening, delay)
     }
 
-    override fun onReadyForSpeech(params: Bundle?)    {}
-    override fun onBeginningOfSpeech()                {}
-    override fun onRmsChanged(rmsdB: Float)           {}
+    override fun onReadyForSpeech(params: Bundle?) {}
+    override fun onBeginningOfSpeech() {}
+    override fun onRmsChanged(rmsdB: Float) {}
     override fun onBufferReceived(buffer: ByteArray?) {}
-    override fun onEndOfSpeech()                      {}
+    override fun onEndOfSpeech() {}
     override fun onEvent(eventType: Int, params: Bundle?) {}
-
-    // ── Helpers ───────────────────────────────────────────────────────────────
 
     private fun injectResult(text: String, isFinal: Boolean) {
         val safe = text.replace("\\", "\\\\").replace("'", "\\'")
