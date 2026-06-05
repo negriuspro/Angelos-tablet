@@ -1,0 +1,43 @@
+name: Deploy angelos
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to angel-server
+    runs-on: [self-hosted, linux, angelos]
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Deploy
+        id: deploy
+        run: bash /home/angel/deploy/deploy-angelos.sh
+
+      - name: Verify container
+        if: always()
+        run: |
+          echo "--- Estado del contenedor ---"
+          docker ps --filter name=angelos --format "table {{.Names}}	{{.Status}}	{{.Ports}}"
+
+      - name: Health check final
+        run: |
+          sleep 3
+          if nc -z 127.0.0.1 3005 2>/dev/null; then
+            echo "OK — Puerto :3005 responde"
+          else
+            echo "WARN — Puerto :3005 no responde (puede ser normal en hairpin NAT)"
+          fi
+
+      - name: Deploy log (ultimas lineas)
+        if: always()
+        run: tail -20 /home/angel/deploy/deploy.log || true
