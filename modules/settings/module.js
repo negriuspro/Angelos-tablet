@@ -47,7 +47,7 @@
       pollInterval:     parseInt(_q('cfg-poll')?.value || '10000'),
       ports: {
         daniel:    _int('cfg-p-daniel',    3002),
-        hub:       _int('cfg-p-hub',       3004),
+        hub:       _int('cfg-p-hub',       3001),
         angelCtrl: _int('cfg-p-angelCtrl', 3000),
         shield:    _int('cfg-p-shield',    3003),
         adguard:   _int('cfg-p-adguard',   3900),
@@ -79,7 +79,7 @@
     const host = _q('cfg-host')?.value.trim() || window.CFG.get('serverHost');
     const ports = {
       Daniel:       _int('cfg-p-daniel',    3002),
-      Hub:          _int('cfg-p-hub',       3004),
+      Hub:          _int('cfg-p-hub',       3001),
       'Angel Ctrl': _int('cfg-p-angelCtrl', 3000),
       Shield:       _int('cfg-p-shield',    3003),
       AdGuard:      _int('cfg-p-adguard',   3900),
