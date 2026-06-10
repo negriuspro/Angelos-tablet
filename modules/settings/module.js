@@ -18,7 +18,6 @@
     _val('cfg-p-daniel',    cfg.ports.daniel);
     _val('cfg-p-hub',       cfg.ports.hub);
     _val('cfg-p-angelCtrl', cfg.ports.angelCtrl);
-    _val('cfg-p-shield',    cfg.ports.shield);
     _val('cfg-p-adguard',   cfg.ports.adguard);
     _val('cfg-dan-token',   cfg.danielAdminToken || '');
     _val('cfg-ac-key',      cfg.angelCtrlApiKey  || '');
@@ -49,7 +48,6 @@
         daniel:    _int('cfg-p-daniel',    3002),
         hub:       _int('cfg-p-hub',       3001),
         angelCtrl: _int('cfg-p-angelCtrl', 3000),
-        shield:    _int('cfg-p-shield',    3003),
         adguard:   _int('cfg-p-adguard',   3900),
       },
     });
@@ -81,7 +79,6 @@
       Daniel:       _int('cfg-p-daniel',    3002),
       Hub:          _int('cfg-p-hub',       3001),
       'Angel Ctrl': _int('cfg-p-angelCtrl', 3000),
-      Shield:       _int('cfg-p-shield',    3003),
       AdGuard:      _int('cfg-p-adguard',   3900),
     };
 

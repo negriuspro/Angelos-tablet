@@ -12,7 +12,6 @@ const DEFAULT_CONFIG = {
     daniel:       3002,   // asistente-daniel nginx
     hub:          3001,   // antigravitymobile (prod)
     angelCtrl:    3000,   // angel-ctrl nginx
-    shield:       3003,   // antigravity-shield nginx
     adguard:      3900,   // adguard admin
   },
 

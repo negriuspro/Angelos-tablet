@@ -8,8 +8,6 @@ const MODULES = [
   { id: 'daniel',        label: 'Daniel',          icon: '◉', folder: 'daniel'        },
   { id: 'angel-control', label: 'Angel Ctrl',      icon: '⊞', folder: 'angel-control' },
   { id: 'monitor',       label: 'Monitor',         icon: '⊕', folder: 'monitor'       },
-  { id: 'shield',        label: 'Shield',          icon: '⊛', folder: 'shield'        },
-  { id: 'hub',           label: 'Hub IA',          icon: '⬡', folder: 'hub'           },
   { id: 'settings',      label: 'Config',          icon: '⚙', folder: 'settings'      },
 ];
 

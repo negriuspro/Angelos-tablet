@@ -130,7 +130,6 @@
       { name: 'Daniel',     url: `http://${host}:${cfg.ports.daniel}/health`    },
       { name: 'Hub',        url: `http://${host}:${cfg.ports.hub}/health`       },
       { name: 'Angel Ctrl', url: `http://${host}:${cfg.ports.angelCtrl}/health` },
-      { name: 'Shield',     url: `http://${host}:${cfg.ports.shield}/health`    },
       { name: 'AdGuard',    url: `http://${host}:${cfg.ports.adguard}/`         },
     ];
 

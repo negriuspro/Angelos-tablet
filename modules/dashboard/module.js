@@ -12,7 +12,6 @@
     { id: 'daniel',      name: 'Daniel',     project: 'daniel',     path: '/health',  port: null, nav: 'daniel'        },
     { id: 'hub',         name: 'Hub',        project: 'hub',        path: '/health',  port: null, nav: 'angel-control'  },
     { id: 'angel-ctrl',  name: 'Angel Ctrl', project: 'angelCtrl',  path: '/health',  port: null, nav: 'angel-control'  },
-    { id: 'shield',      name: 'Shield',     project: 'shield',     path: '/health',  port: null, nav: 'shield'         },
   ];
 
   window.AngelOS.register('dashboard', {

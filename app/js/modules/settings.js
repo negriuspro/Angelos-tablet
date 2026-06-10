@@ -47,10 +47,6 @@
             <input id="cfg-port-angelCtrl" type="number" value="${cfg.ports.angelCtrl}">
           </div>
           <div class="field">
-            <label>Shield</label>
-            <input id="cfg-port-shield" type="number" value="${cfg.ports.shield}">
-          </div>
-          <div class="field">
             <label>AdGuard Admin</label>
             <input id="cfg-port-adguard" type="number" value="${cfg.ports.adguard}">
           </div>
@@ -93,7 +89,7 @@
           Versión: 1.0.0<br>
           Plataforma: Tablet / Android legacy<br>
           Servidor: <span id="cfg-server-info">${cfg.serverHost}</span><br>
-          Módulos activos: Daniel · Hub · Angel Ctrl · Shield
+          Módulos activos: Daniel · Hub · Angel Ctrl
         </div>
       </div>
     `;
@@ -115,7 +111,6 @@
         daniel:    parseInt(_$('cfg-port-daniel')?.value   || '3002'),
         hub:       parseInt(_$('cfg-port-hub')?.value      || '3004'),
         angelCtrl: parseInt(_$('cfg-port-angelCtrl')?.value || '3000'),
-        shield:    parseInt(_$('cfg-port-shield')?.value   || '3003'),
         adguard:   parseInt(_$('cfg-port-adguard')?.value  || '3900'),
       },
     });
