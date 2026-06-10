@@ -78,7 +78,7 @@
       try {
         data = await window.API.get('angelCtrl', '/api/containers');
       } catch {
-        data = await window.API.get('hub', '/servers/');
+        data = await window.API.get('hub', '/servers');
       }
       _containers = Array.isArray(data) ? data : (data.containers || data.servers || []);
     } catch (e) {

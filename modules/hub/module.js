@@ -260,7 +260,7 @@
     el.innerHTML = '<div class="loading">Cargando…</div>';
 
     try {
-      const data = await window.API.get('hub', '/servers/');
+      const data = await window.API.get('hub', '/servers');
       const containers = Array.isArray(data)
         ? data
         : (data.containers || data.servers || []);
