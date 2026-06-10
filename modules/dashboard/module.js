@@ -115,12 +115,15 @@
       }
 
       el.innerHTML = containers.slice(0, 20).map(c => {
-        const isRunning = c.running || c.state === 'running' || c.status === 'running';
+        const isRunning  = c.running || c.state === 'running' || c.status === 'running';
+        const restarting = (c.status || c.state || '').includes('restart');
+        const stateClass = restarting ? 'restarting' : isRunning ? 'running' : 'stopped';
         return `
-          <div class="db-ct-row">
-            <div class="db-ct-dot ${isRunning ? 'run' : 'stop'}"></div>
-            <div class="db-ct-name">${c.name}</div>
-            <div class="db-ct-status">${c.status || c.state || '—'}</div>
+          <div class="db-ct-card ${stateClass}">
+            <div class="db-ct-info">
+              <div class="db-ct-name">${c.name}</div>
+              <div class="db-ct-detail">${c.image || ''} · ${c.status || c.state || '—'}</div>
+            </div>
           </div>
         `;
       }).join('');
